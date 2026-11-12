@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pendaftaran SPMB</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap">
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--ink:#17233b;--mute:#5d6b82;--line:#dbe1ea;--brand:#1f5eff;--brand-ink:#fff;--soft:#eaf0ff;--err:#c62f3b;--ok:#17803d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1420;--card:#161e2e;--ink:#e8edf7;--mute:#9aa7bd;--line:#2a3550;--brand:#6a92ff;--brand-ink:#0b1220;--soft:#1c2845;--err:#ff7b86;--ok:#5fd18a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1420;--card:#161e2e;--ink:#e8edf7;--mute:#9aa7bd;--line:#2a3550;--brand:#6a92ff;--brand-ink:#0b1220;--soft:#1c2845;--err:#ff7b86;--ok:#5fd18a;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Plus Jakarta Sans",system-ui,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:640px;margin:0 auto;padding:16px 20px}
+.logo{font-weight:800;font-size:17px}
+.logo small{display:block;font-weight:400;font-size:13px;color:var(--mute)}
+button{font:inherit;cursor:pointer}
+.btn{border:0;border-radius:10px;padding:12px 20px;font-weight:600;background:var(--brand);color:var(--brand-ink)}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand);padding:8px 16px}
+.btn.full{width:100%}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+main{max-width:640px;margin:0 auto;padding:8px 20px 48px}
+h1{font-size:clamp(26px,6vw,34px);line-height:1.15;margin:8px 0 6px;font-weight:800}
+.sub{color:var(--mute);margin:0 0 24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.field{margin-bottom:20px}
+label,.lbl{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+input[type=text],input[type=tel],input[type=email],input[type=password]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus{border-color:var(--brand);outline:none;box-shadow:0 0 0 3px var(--soft)}
+.hint{font-size:13px;color:var(--mute);margin-top:4px}
+.err{font-size:13px;color:var(--err);margin-top:4px;min-height:0}
+.invalid input{border-color:var(--err)}
+.opts{display:grid;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.opt span{display:block;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg)}
+.opt span b{display:block;font-size:15px}
+.opt span i{font-style:normal;font-size:13px;color:var(--mute)}
+.opt input:checked+span{border-color:var(--brand);background:var(--soft)}
+.opt input:focus-visible+span{outline:3px solid var(--brand);outline-offset:2px}
+.pay{grid-template-columns:repeat(2,1fr)}
+.pay .opt span{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;padding:10px 12px}
+.pm{width:44px;height:30px;flex:none;border-radius:6px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:12px;letter-spacing:.2px}
+.pm svg{width:100%;height:100%;display:block}
+select{width:100%;padding:12px 40px 12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%238a96ab' stroke-width='2'%3E%3Cpath d='M1 1l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;color:var(--ink);font:inherit;appearance:none;-webkit-appearance:none;cursor:pointer}
+select:focus{border-color:var(--brand);outline:none;box-shadow:0 0 0 3px var(--soft)}
+.invalid select{border-color:var(--err)}
+.price{display:flex;align-items:baseline;justify-content:space-between;gap:12px;background:var(--soft);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.price span{font-size:14px;color:var(--mute)}
+.price b{font-size:20px;font-weight:800;color:var(--brand)}
+.price.empty b{font-size:14px;font-weight:500;color:var(--mute)}
+.done{text-align:center;padding:12px 0}
+.done .tick{width:56px;height:56px;border-radius:50%;background:var(--soft);color:var(--ok);display:grid;place-items:center;font-size:28px;margin:0 auto 12px}
+.sum{text-align:left;background:var(--bg);border-radius:10px;padding:14px 16px;margin:16px 0;font-size:14px}
+.sum div{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+.sum span{color:var(--mute)}
+.proto{font-size:13px;color:var(--mute);text-align:center;margin-top:16px}
+dialog{border:0;border-radius:16px;padding:0;width:min(420px,calc(100% - 32px));background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(10,16,30,.55)}
+.dlg{padding:24px}
+.tabs{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px;margin-bottom:20px}
+.tabs button{flex:1;border:0;background:transparent;padding:9px;border-radius:8px;font-weight:600;color:var(--mute)}
+.tabs button[aria-selected=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.close{float:right;border:0;background:none;font-size:22px;color:var(--mute);line-height:1}
+textarea,input[type=date]{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+textarea{resize:vertical;min-height:84px}
+textarea:focus,input[type=date]:focus{border-color:var(--brand);outline:none;box-shadow:0 0 0 3px var(--soft)}
+.invalid textarea{border-color:var(--err)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media (max-width:480px){.g2{grid-template-columns:1fr}}
+.sec{font-weight:800;font-size:15px;margin:8px 0 14px}
+.sec:not(:first-child){margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.steps{display:flex;gap:8px;list-style:none;padding:0;margin:0 0 16px;font-size:13px;font-weight:600}
+.steps li{flex:1;padding:8px 10px;border-radius:8px;background:var(--card);border:1px solid var(--line);color:var(--mute)}
+.steps li.on{background:var(--soft);border-color:var(--brand);color:var(--brand)}
+.ref{grid-template-columns:repeat(3,1fr)}
+.ref .opt span{text-align:center;font-weight:600;font-size:14px;padding:12px 6px}
+.back{margin-bottom:16px}
+.hidden{display:none}
+@media (max-width:340px){.pay{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">SMK Nama Sekolah<small>SPMB 2027/2028</small></div>
+  <button class="btn ghost" id="openLogin" type="button">Masuk</button>
+</header>
+
+<main>
+  <h1>Daftar siswa baru</h1>
+  <p class="sub">Dua langkah: isi formulir dulu, lanjut pilih jurusan dan cara bayar.</p>
+
+  <ol class="steps" id="steps"><li class="on" id="s1">1. Formulir</li><li id="s2">2. Jurusan dan bayar</li></ol>
+
+  <section class="card" id="bioCard">
+    <form id="bio" novalidate>
+      <div class="sec">A. Data calon siswa</div>
+      <div class="field" data-f="bNama"><label for="bNama">Nama lengkap</label><input id="bNama" type="text" autocomplete="name" placeholder="Sesuai ijazah"><div class="err"></div></div>
+      <div class="g2">
+        <div class="field" data-f="bNisn"><label for="bNisn">NISN</label><input id="bNisn" type="text" inputmode="numeric" maxlength="10" placeholder="10 digit"><div class="err"></div></div>
+        <div class="field" data-f="bNik"><label for="bNik">NIK</label><input id="bNik" type="text" inputmode="numeric" maxlength="16" placeholder="16 digit, lihat KK"><div class="err"></div></div>
+      </div>
+      <div class="g2">
+        <div class="field" data-f="bTempat"><label for="bTempat">Tempat lahir</label><input id="bTempat" type="text" placeholder="Contoh: Depok"><div class="err"></div></div>
+        <div class="field" data-f="bTgl"><label for="bTgl">Tanggal lahir</label><input id="bTgl" type="date"><div class="err"></div></div>
+      </div>
+      <div class="g2">
+        <div class="field" data-f="bJk"><label for="bJk">Jenis kelamin</label><select id="bJk"><option value="">Pilih</option><option>Laki-laki</option><option>Perempuan</option></select><div class="err"></div></div>
+        <div class="field" data-f="bAgama"><label for="bAgama">Agama</label><select id="bAgama"><option value="">Pilih</option><option>Islam</option><option>Kristen</option><option>Katolik</option><option>Hindu</option><option>Buddha</option><option>Konghucu</option></select><div class="err"></div></div>
+      </div>
+      <div class="field" data-f="bHp"><label for="bHp">No. HP/WA siswa</label><input id="bHp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx"><div class="err"></div></div>
+      <div class="field" data-f="bAlamat"><label for="bAlamat">Alamat lengkap</label><textarea id="bAlamat" placeholder="Jalan, RT/RW, kelurahan, kecamatan"></textarea><div class="err"></div></div>
+
+      <div class="sec">B. Asal sekolah</div>
+      <div class="g2">
+        <div class="field" data-f="bSmp"><label for="bSmp">Asal SMP/MTs</label><input id="bSmp" type="text" placeholder="Contoh: SMPN 1 Depok"><div class="err"></div></div>
+        <div class="field" data-f="bLulus"><label for="bLulus">Tahun lulus</label><input id="bLulus" type="text" inputmode="numeric" maxlength="4" placeholder="2027"><div class="err"></div></div>
+      </div>
+
+      <div class="sec">C. Data orang tua/wali</div>
+      <div class="field" data-f="bOrtu"><label for="bOrtu">Nama orang tua/wali</label><input id="bOrtu" type="text"><div class="err"></div></div>
+      <div class="g2">
+        <div class="field" data-f="bKerja"><label for="bKerja">Pekerjaan</label><input id="bKerja" type="text" placeholder="Contoh: Wiraswasta"><div class="err"></div></div>
+        <div class="field" data-f="bTelp"><label for="bTelp">No. telepon orang tua/wali</label><input id="bTelp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx"><div class="err"></div></div>
+      </div>
+
+      <div class="sec">D. Referensi</div>
+      <div class="field" data-f="ref">
+        <span class="lbl">Tahu sekolah ini dari siapa?</span>
+        <div class="opts ref">
+          <label class="opt"><input type="radio" name="ref" value="Guru"><span>Guru</span></label>
+          <label class="opt"><input type="radio" name="ref" value="Murid"><span>Murid</span></label>
+          <label class="opt"><input type="radio" name="ref" value="Tidak ada"><span>Tidak ada</span></label>
+        </div>
+        <div class="err"></div>
+      </div>
+      <div class="field hidden" id="refNamaWrap" data-f="refNama">
+        <label for="refNama" id="refLbl">Nama</label>
+        <input id="refNama" type="text" placeholder="Tulis nama lengkapnya">
+        <div class="hint">Nama ini dicek admin. Orang yang kamu sebut dapat dispensasi Rp 100.000 dari sekolah.</div>
+        <div class="err"></div>
+      </div>
+
+      <button class="btn full" type="submit">Lanjut pilih jurusan</button>
+    </form>
+  </section>
+
+  <section class="card hidden" id="formCard">
+    <button class="btn ghost back" id="back" type="button">← Ubah formulir</button>
+    <form id="spmb" novalidate>
+      <div class="field" data-f="nama">
+        <label for="nama">Nama lengkap</label>
+        <input id="nama" type="text" autocomplete="name" placeholder="Sesuai ijazah">
+        <div class="err"></div>
+      </div>
+      <div class="field" data-f="smp">
+        <label for="smp">Asal SMP/MTs</label>
+        <input id="smp" type="text" placeholder="Contoh: SMPN 1 Depok">
+        <div class="err"></div>
+      </div>
+      <div class="field" data-f="telp">
+        <label for="telp">No. telepon orang tua/wali</label>
+        <input id="telp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx">
+        <div class="hint">Nomor aktif, dipakai untuk konfirmasi pendaftaran.</div>
+        <div class="err"></div>
+      </div>
+
+      <div class="field" data-f="jurusan">
+        <span class="lbl">Pilih jurusan</span>
+        <select id="jurusan" aria-label="Pilih jurusan">
+          <option value="">Pilih jurusan</option>
+          <option value="DKV">DKV - Desain Komunikasi Visual</option>
+          <option value="TJKT">TJKT - Teknik Jaringan Komputer dan Telekomunikasi</option>
+          <option value="PM">PM - Pemasaran</option>
+          <option value="MPLB">MPLB - Manajemen Perkantoran dan Layanan Bisnis</option>
+          <option value="Akuntansi">Akuntansi - Akuntansi dan Keuangan Lembaga</option>
+        </select>
+        <div class="err"></div>
+      </div>
+
+      <div class="field" data-f="bayar">
+        <div class="price empty" id="price" aria-live="polite"><span>Biaya pendaftaran</span><b id="priceVal">Pilih jurusan dulu</b></div>
+        <span class="lbl">Metode pembayaran</span>
+        <div class="opts pay">
+          <label class="opt"><input type="radio" name="bayar" value="QRIS"><span><i class="pm" style="background:#fff;border:1px solid var(--line)"><svg viewBox="0 0 44 30" aria-hidden="true"><g fill="#c8102e"><rect x="12" y="3" width="8" height="8"/><rect x="24" y="3" width="8" height="8"/><rect x="12" y="15" width="8" height="8"/></g><g fill="#17233b"><rect x="14" y="5" width="4" height="4"/><rect x="26" y="5" width="4" height="4"/><rect x="14" y="17" width="4" height="4"/><rect x="24" y="15" width="3" height="3"/><rect x="29" y="19" width="3" height="4"/></g></svg></i>QRIS</span></label>
+          <label class="opt"><input type="radio" name="bayar" value="Transfer BCA"><span><i class="pm" style="background:#0a5cb8">BCA</i>Transfer BCA</span></label>
+          <label class="opt"><input type="radio" name="bayar" value="Transfer BRI"><span><i class="pm" style="background:#00529c">BRI</i>Transfer BRI</span></label>
+          <label class="opt"><input type="radio" name="bayar" value="Transfer Mandiri"><span><i class="pm" style="background:#10346b;color:#ffc72c">mandiri</i>Transfer Mandiri</span></label>
+          <label class="opt"><input type="radio" name="bayar" value="Tunai di sekolah"><span><i class="pm" style="background:#2e8b57"><svg viewBox="0 0 44 30" aria-hidden="true"><rect x="8" y="8" width="28" height="14" rx="2" fill="none" stroke="#fff" stroke-width="2"/><circle cx="22" cy="15" r="3.5" fill="#fff"/></svg></i>Tunai di sekolah</span></label>
+        </div>
+        <div class="err"></div>
+      </div>
+
+      <button class="btn full" type="submit">Kirim pendaftaran</button>
+    </form>
+  </section>
+
+  <section class="card hidden" id="doneCard">
+    <div class="done">
+      <div class="tick" aria-hidden="true">✓</div>
+      <h2 style="margin:0 0 4px">Pendaftaran terkirim</h2>
+      <p class="sub" style="margin:0">Panitia akan menghubungi orang tua/wali lewat nomor yang kamu isi.</p>
+      <div class="sum" id="sum"></div>
+      <button class="btn ghost" id="again" type="button">Isi pendaftaran baru</button>
+    </div>
+  </section>
+
+  <p class="proto">Ini prototipe tampilan. Data tidak dikirim ke mana pun.</p>
+</main>
+
+<dialog id="dlg">
+  <div class="dlg">
+    <button class="close" id="closeDlg" type="button" aria-label="Tutup">×</button>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tLogin" aria-selected="true">Masuk</button>
+      <button type="button" role="tab" id="tReg" aria-selected="false">Buat akun</button>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="field"><label for="lEmail">Email</label><input id="lEmail" type="email" autocomplete="email" placeholder="nama@email.com"></div>
+      <div class="field"><label for="lPass">Kata sandi</label><input id="lPass" type="password" autocomplete="current-password"></div>
+      <button class="btn full" type="submit">Masuk</button>
+      <p class="hint" id="lMsg" style="text-align:center"></p>
+    </form>
+
+    <form id="regForm" class="hidden" novalidate>
+      <div class="field"><label for="rNama">Nama lengkap</label><input id="rNama" type="text" autocomplete="name"></div>
+      <div class="field"><label for="rEmail">Email</label><input id="rEmail" type="email" autocomplete="email" placeholder="nama@email.com"></div>
+      <div class="field"><label for="rPass">Kata sandi</label><input id="rPass" type="password" autocomplete="new-password"><div class="hint">Minimal 8 karakter.</div></div>
+      <button class="btn full" type="submit">Buat akun</button>
+      <p class="hint" id="rMsg" style="text-align:center"></p>
+    </form>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var form=$('#spmb');
+  var HARGA={Akuntansi:900000,MPLB:1000000,PM:1100000,DKV:1250000,TJKT:1400000};
+  function rp(n){return 'Rp '+n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
+  function showPrice(){
+    var j=$('#jurusan').value,p=$('#price'),v=$('#priceVal');
+    if(HARGA[j]){v.textContent=rp(HARGA[j]);p.classList.remove('empty')}
+    else{v.textContent='Pilih jurusan dulu';p.classList.add('empty')}
+  }
+  $('#jurusan').addEventListener('change',showPrice);
+  function setErr(name,msg){
+    var f=document.querySelector('[data-f="'+name+'"]');
+    f.classList.toggle('invalid',!!msg);
+    f.querySelector('.err').textContent=msg||'';
+  }
+  function checked(n){var e=form.querySelector('input[name="'+n+'"]:checked');return e?e.value:''}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var nama=$('#nama').value.trim(),smp=$('#smp').value.trim(),telp=$('#telp').value.replace(/[\s-]/g,'');
+    var jur=$('#jurusan').value,bayar=checked('bayar'),ok=true;
+    function chk(n,bad,msg){setErr(n,bad?msg:'');if(bad)ok=false}
+    chk('nama',nama.length<3,'Isi nama lengkap, minimal 3 huruf.');
+    chk('smp',smp.length<3,'Isi asal SMP/MTs.');
+    chk('telp',!/^(08|\+?628)\d{7,11}$/.test(telp),'Nomor belum benar. Contoh: 081234567890.');
+    chk('jurusan',!jur,'Pilih satu jurusan.');
+    chk('bayar',!bayar,'Pilih metode pembayaran.');
+    if(!ok){var first=document.querySelector('.invalid');if(first)first.scrollIntoView({block:'center'});return}
+    var rows=[['Nama',nama],['Asal SMP',smp],['Telp orang tua',telp],['Referensi',refText],['Jurusan',jur],['Biaya pendaftaran',rp(HARGA[jur])],['Pembayaran',bayar]];
+    var box=$('#sum');box.innerHTML='';
+    rows.forEach(function(r){var d=document.createElement('div');var a=document.createElement('span');a.textContent=r[0];var b=document.createElement('b');b.textContent=r[1];d.appendChild(a);d.appendChild(b);box.appendChild(d)});
+    $('#formCard').classList.add('hidden');$('#doneCard').classList.remove('hidden');$('#steps').classList.add('hidden');
+    window.scrollTo(0,0);
+  });
+  var refText='Tidak ada';
+  function goStep(n){
+    $('#steps').classList.remove('hidden');
+    $('#bioCard').classList.toggle('hidden',n!==1);
+    $('#formCard').classList.toggle('hidden',n!==2);
+    $('#s1').classList.toggle('on',n===1);$('#s2').classList.toggle('on',n===2);
+    window.scrollTo(0,0);
+  }
+  $('#back').addEventListener('click',function(){goStep(1)});
+  document.querySelectorAll('input[name="ref"]').forEach(function(r){
+    r.addEventListener('change',function(){
+      var g=r.value==='Guru',m=r.value==='Murid';
+      $('#refNamaWrap').classList.toggle('hidden',!(g||m));
+      $('#refLbl').textContent=g?'Nama guru yang kasih tau':'Nama murid yang kasih tau';
+      setErr('ref','');setErr('refNama','');
+    });
+  });
+  $('#bio').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=function(id){return $('#'+id).value.trim()};
+    var hp=v('bHp').replace(/[\s-]/g,''),tl=v('bTelp').replace(/[\s-]/g,'');
+    var rr=document.querySelector('input[name="ref"]:checked'),ref=rr?rr.value:'',ok=true;
+    function c(n,bad,msg){setErr(n,bad?msg:'');if(bad)ok=false}
+    c('bNama',v('bNama').length<3,'Isi nama lengkap, minimal 3 huruf.');
+    c('bNisn',!/^\d{10}$/.test(v('bNisn')),'NISN harus 10 digit angka.');
+    c('bNik',!/^\d{16}$/.test(v('bNik')),'NIK harus 16 digit angka.');
+    c('bTempat',v('bTempat').length<2,'Isi tempat lahir.');
+    c('bTgl',!v('bTgl'),'Pilih tanggal lahir.');
+    c('bJk',!v('bJk'),'Pilih jenis kelamin.');
+    c('bAgama',!v('bAgama'),'Pilih agama.');
+    c('bHp',!/^(08|\+?628)\d{7,11}$/.test(hp),'Nomor belum benar. Contoh: 081234567890.');
+    c('bAlamat',v('bAlamat').length<8,'Isi alamat lengkap.');
+    c('bSmp',v('bSmp').length<3,'Isi asal SMP/MTs.');
+    c('bLulus',!/^20\d{2}$/.test(v('bLulus')),'Isi tahun lulus, contoh 2027.');
+    c('bOrtu',v('bOrtu').length<3,'Isi nama orang tua/wali.');
+    c('bKerja',v('bKerja').length<3,'Isi pekerjaan.');
+    c('bTelp',!/^(08|\+?628)\d{7,11}$/.test(tl),'Nomor belum benar. Contoh: 081234567890.');
+    c('ref',!ref,'Pilih salah satu.');
+    c('refNama',(ref==='Guru'||ref==='Murid')&&v('refNama').length<3,'Tulis nama lengkapnya.');
+    if(!ok){var first=document.querySelector('.invalid');if(first)first.scrollIntoView({block:'center'});return}
+    refText=(ref==='Tidak ada')?'Tidak ada':ref+': '+v('refNama');
+    $('#nama').value=v('bNama');$('#smp').value=v('bSmp');$('#telp').value=tl;
+    goStep(2);
+  });
+  $('#again').addEventListener('click',function(){
+    form.reset();showPrice();['nama','smp','telp','jurusan','bayar'].forEach(function(n){setErr(n,'')});
+    $('#bio').reset();refText='Tidak ada';$('#refNamaWrap').classList.add('hidden');
+    document.querySelectorAll('.invalid').forEach(function(f){f.classList.remove('invalid')});
+    $('#doneCard').classList.add('hidden');goStep(1);
+  });
+
+  var dlg=$('#dlg');
+  $('#openLogin').addEventListener('click',function(){dlg.showModal()});
+  $('#closeDlg').addEventListener('click',function(){dlg.close()});
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  function tab(login){
+    $('#tLogin').setAttribute('aria-selected',login);$('#tReg').setAttribute('aria-selected',!login);
+    $('#loginForm').classList.toggle('hidden',!login);$('#regForm').classList.toggle('hidden',login);
+  }
+  $('#tLogin').addEventListener('click',function(){tab(true)});
+  $('#tReg').addEventListener('click',function(){tab(false)});
+  $('#loginForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    $('#lMsg').textContent=(!$('#lEmail').value.trim()||!$('#lPass').value)?'Isi email dan kata sandi dulu.':'Prototipe: login belum tersambung ke server.';
+  });
+  $('#regForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var m=$('#rMsg');
+    if(!$('#rNama').value.trim()||!$('#rEmail').value.trim())m.textContent='Nama dan email wajib diisi.';
+    else if($('#rPass').value.length<8)m.textContent='Kata sandi minimal 8 karakter.';
+    else m.textContent='Prototipe: akun belum benar-benar dibuat.';
+  });
+})();
+</script>
+</body>
+</html>
